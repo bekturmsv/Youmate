@@ -8,6 +8,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import path from "path";
 import {fileURLToPath} from 'url';
+import authRoutes from './routes/auth.js'
 import {register} from './controllers/auth.js'
 
 // Configs
@@ -17,9 +18,6 @@ dotenv.config();
 const app = express();
 app.use(express.json())
 app.use(helmet())
-// app.use(helmet.crossOriginEmbedderPolicy({
-//     policy: 'cross-origin'
-// }))
 app.use(function(req, res, next) {
     res.header("Cross-Origin-Embedded-Policy", "require-corp");
     res.header("Cross-Origin-Opener-Policy", "same-origin");
@@ -43,11 +41,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage})
 
+// Routes with files
+app.post('/auth/register', upload.single('picture'), register)
+
 // Routes
-app.post('/auth/register', upload.single('picture'),register)
+app.use('/auth',authRoutes)
 
 // Mongoose setup
-
 const PORT = process.env.PORT || 3001;
 mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser: true,
