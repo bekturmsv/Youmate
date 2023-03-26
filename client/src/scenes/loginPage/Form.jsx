@@ -71,7 +71,7 @@ const Form = () => {
       formData
     );
 
-    const savedUser = await savedUserResponse.json();
+    const savedUser = await savedUserResponse;
     onSubmitProps.resetForm();
     if (savedUser) {
       setPageType("login");
@@ -88,13 +88,13 @@ const Form = () => {
         },
       }
     );
-    const loggedIn = await loggedInResponse.json();
+    const loggedIn = await loggedInResponse;
     onSubmitProps.resetForm();
     if (loggedIn) {
       dispatch(
         setLogin({
-          user: loggedIn.user,
-          token: loggedIn.token,
+          user: loggedIn.data.user,
+          token: loggedIn.data.token,
         })
       );
       navigate("/home");
