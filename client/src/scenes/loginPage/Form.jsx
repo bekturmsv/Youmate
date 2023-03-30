@@ -67,12 +67,11 @@ const Form = () => {
     }
     formData.append("picturePath", values.picture.name);
 
-    const savedUserResponse = await axios.post(
+    const savedUser = await axios.post(
       `${REACT_APP_API_URL}auth/register`,
       formData
     );
 
-    const savedUser = await savedUserResponse;
     onSubmitProps.resetForm();
     if (savedUser) {
       setPageType("login");
@@ -80,7 +79,7 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await axios.post(
+    const loggedIn = await axios.post(
       `${REACT_APP_API_URL}auth/login`,
       JSON.stringify(values),
       {
@@ -89,7 +88,6 @@ const Form = () => {
         },
       }
     );
-    const loggedIn = await loggedInResponse;
     onSubmitProps.resetForm();
     if (loggedIn) {
       dispatch(
