@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { REACT_APP_API_URL } from "helpers/constants";
+import { Twitter, LinkedIn } from "@mui/icons-material";
 
 const UserWidget = ({ userId, picturePath }) => {
   const [user, setUser] = useState(null);
@@ -123,10 +124,33 @@ const UserWidget = ({ userId, picturePath }) => {
             Social Profiles
           </Typography>
           <FlexBetween gap="1rem" mb="0.5rem">
-            <FlexBetween gap="1rem">{/* Twitter Icon */}</FlexBetween>
+            <FlexBetween gap="1rem">
+              <Twitter />
+              <Box>
+                <Typography color={main} fontWeight="500">
+                  Twitter
+                </Typography>
+                <Typography color={medium}>Social Network</Typography>
+              </Box>
+            </FlexBetween>
+            <EditOutlined sx={{ color: main }} />
+          </FlexBetween>
+          <FlexBetween gap="1rem">
+            <FlexBetween gap="1rem">
+              <LinkedIn />
+              <Box>
+                <Typography color={main} fontWeight="500">
+                  LinkedIn
+                </Typography>
+                <Typography color={medium}>Network Platform</Typography>
+              </Box>
+            </FlexBetween>
+            <EditOutlined sx={{ color: main }} />
           </FlexBetween>
         </Box>
       </FlexBetween>
     </WidgetWrapper>
   );
 };
+
+export default UserWidget;
