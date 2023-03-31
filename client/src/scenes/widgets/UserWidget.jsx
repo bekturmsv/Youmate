@@ -28,7 +28,7 @@ const UserWidget = ({ userId, picturePath }) => {
   const getUser = async () => {
     const data = await axios(`${REACT_APP_API_URL}users/${userId}`, {
       headers: { Authorization: `Bearer ${token}` },
-    });
+    }); // eslint-disable-next-line
 
     setUser(data);
     /* 
@@ -58,8 +58,7 @@ const UserWidget = ({ userId, picturePath }) => {
     viewedProfile,
     impressions,
     friends,
-  } = user;
-
+  } = user.data;
   return (
     <WidgetWrapper>
       <FlexBetween
