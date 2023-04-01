@@ -24,7 +24,6 @@ import UserImage from "components/UserImage";
 import WidgetWrapper from "components/WidgetWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "redux/state";
-import { REACT_APP_API_URL } from "helpers/constants";
 import axios from "axios";
 
 const MyPostWidget = ({ picturePath }) => {
@@ -48,9 +47,13 @@ const MyPostWidget = ({ picturePath }) => {
       formData.append("picturePath", image.name);
     }
 
-    const posts = await axios.post(`${REACT_APP_API_URL}posts`, formData, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const posts = await axios.post(
+      `${process.env.REACT_APP_API_URL}/posts`,
+      formData,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     dispatch(setPosts({ posts }));
     setImage(null);
     setPost("");

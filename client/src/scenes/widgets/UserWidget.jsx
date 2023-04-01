@@ -13,7 +13,6 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { REACT_APP_API_URL } from "helpers/constants";
 import { Twitter, LinkedIn } from "@mui/icons-material";
 
 const UserWidget = ({ userId, picturePath }) => {
@@ -26,9 +25,12 @@ const UserWidget = ({ userId, picturePath }) => {
   const main = palette.neutral.main;
 
   const getUser = async () => {
-    const data = await axios(`${REACT_APP_API_URL}users/${userId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    }); // eslint-disable-next-line
+    const data = await axios(
+      `${process.env.REACT_APP_API_URL}/users/${userId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    ); // eslint-disable-next-line
 
     setUser(data);
     /* 

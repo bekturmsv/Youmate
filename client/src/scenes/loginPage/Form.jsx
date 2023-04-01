@@ -16,7 +16,6 @@ import { setLogin } from "redux/state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
 import axios from "axios";
-import { REACT_APP_API_URL } from "helpers/constants";
 
 // Register validating
 const registerSchema = yup.object().shape({
@@ -68,7 +67,7 @@ const Form = () => {
     formData.append("picturePath", values.picture.name);
 
     const savedUser = await axios.post(
-      `${REACT_APP_API_URL}auth/register`,
+      `${process.env.REACT_APP_API_URL}/auth/register`,
       formData
     );
 
@@ -80,7 +79,7 @@ const Form = () => {
 
   const login = async (values, onSubmitProps) => {
     const loggedIn = await axios.post(
-      `${REACT_APP_API_URL}auth/login`,
+      `${process.env.REACT_APP_API_URL}/auth/login`,
       JSON.stringify(values),
       {
         headers: {
