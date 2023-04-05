@@ -18,6 +18,19 @@ const PostsWidget = ({ userId, isProfile = false }) => {
 
     dispatch(setPosts({ posts: data }));
   };
+
+  const getUserPosts = async () => {
+    const data = await axios(
+      `${process.env.REACT_APP_API_URL}/posts/${userId}/posts`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    dispatch(setPosts({ posts: data }));
+  };
 };
 
 export default PostsWidget;
