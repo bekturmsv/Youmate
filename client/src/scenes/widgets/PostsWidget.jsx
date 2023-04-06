@@ -60,7 +60,7 @@ return (
           key={_id}
           postId={_id}
           postUserId={userId}
-          firstName={`${firstName} ${lastName}`}
+          name={`${firstName} ${lastName}`}
           description={description}
           location={location}
           picturePath={picturePath}
