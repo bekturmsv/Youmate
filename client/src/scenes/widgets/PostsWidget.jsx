@@ -15,7 +15,6 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         Authorization: `Bearer ${token}`,
       },
     });
-
     dispatch(setPosts({ posts: data }));
   };
 
@@ -28,7 +27,6 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         },
       }
     );
-
     dispatch(setPosts({ posts: data }));
   };
 
@@ -39,38 +37,38 @@ const PostsWidget = ({ userId, isProfile = false }) => {
       getPosts();
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  console.log(posts.data);
+  return (
+    <>
+      {posts.data.map(
+        ({
+          _id,
+          userId,
+          firstName,
+          lastName,
+          description,
+          location,
+          picturePath,
+          userPicturePath,
+          likes,
+          comments,
+        }) => (
+          <PostWidget
+            key={_id}
+            postId={_id}
+            postUserId={userId}
+            name={`${firstName} ${lastName}`}
+            description={description}
+            location={location}
+            picturePath={picturePath}
+            userPicturePath={userPicturePath}
+            likes={likes}
+            comments={comments}
+          />
+        )
+      )}
+    </>
+  );
 };
-
-return (
-  <>
-    {posts.map(
-      ({
-        _id,
-        userId,
-        firstName,
-        lastName,
-        description,
-        location,
-        picturePath,
-        userPicturePath,
-        likes,
-        comments,
-      }) => (
-        <PostWidget
-          key={_id}
-          postId={_id}
-          postUserId={userId}
-          name={`${firstName} ${lastName}`}
-          description={description}
-          location={location}
-          picturePath={picturePath}
-          userPicturePath={userPicturePath}
-          likes={likes}
-          comments={comments}
-        />
-      )
-    )}
-  </>
-);
 
 export default PostsWidget;
